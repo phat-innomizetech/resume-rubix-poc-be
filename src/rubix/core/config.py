@@ -6,6 +6,7 @@ from pydantic import (
     computed_field,
 )
 from pydantic_settings import BaseSettings, SettingsConfigDict
+import os
 
 
 def parse_cors(v: Any) -> list[str] | str:
