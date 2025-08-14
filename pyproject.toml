@@ -1,0 +1,37 @@
+[project]
+name = "rubix"
+version = "0.1.0"
+description = "A starter template for FastAPI projects"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "fastapi[standard]<1.0.0,>=0.115.12",
+    "python-multipart<1.0.0,>=0.0.20",
+    "httpx<1.0.0,>=0.28.1",
+    "psutil>=7.0.0",
+    "pydantic>=2.10.6",
+    "pydantic-settings>=2.8.1",
+    "neo4j>=5.28.1",
+    "aio-pika>=9.0.0",
+    "pymupdf>=1.26.3",
+    "transformers>=4.55.0",
+    "torch>=2.8.0",
+    "pypdf>=6.0.0",
+    "langchain-huggingface>=0.3.1",
+    "langchain-google-genai>=2.1.9",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest<9.0.0,>=8.3.5",
+    "mypy<2.0.0,>=1.15.0",
+    "ruff<1.0.0,>=0.11.2",
+    "pre-commit<5.0.0,>=4.2.0",
+    "types-passlib<2.0.0.0,>=1.7.7.20250322",
+    "coverage<8.0.0,>=7.7.1",
+    "types-psutil>=7.0.0.20250218",
+    "fastapi-cli>=0.0.7",
+]

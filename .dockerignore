@@ -1,0 +1,29 @@
+**/.vscode
+**/.git
+**/.gitignore
+
+# Python
+**/__pycache__
+**/.venv
+**/.classpath
+**/.env
+**/.project
+**/.settings
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/bin
+**/charts
+htmlcov
+tests
+pytest.ini
+**/*.log
+
+# Docker
+**/Dockerfile*
+**/.dockerignore
+**/docker-compose*
+**/compose*
+
+README.md
+*.log
