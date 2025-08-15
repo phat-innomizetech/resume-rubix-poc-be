@@ -9,7 +9,7 @@ T = TypeVar("T")
 class StatusCode(str, Enum):
     """Standard status codes for API responses"""
 
-    SUCCESS = "000"
+    SUCCESS = "200"
     BAD_REQUEST = "400"
     UNAUTHORIZED = "401"
     FORBIDDEN = "403"
