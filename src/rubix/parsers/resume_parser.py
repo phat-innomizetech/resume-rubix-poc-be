@@ -5,7 +5,8 @@ from transformers import pipeline
 from langchain_google_genai import ChatGoogleGenerativeAI
 from rubix.core.config import settings
 from rubix.constants.prompt import DEFAULT_PROMPT
-from rubix.helpers.convert_ner import ner_to_resume_schema
+from rubix.helpers.response_processing import ner_to_resume_schema, extract_json_content
+import requests
 
 logging.basicConfig(level=logging.INFO, format="[Rubix] %(name)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -39,8 +40,7 @@ class ResumeParser:
                 self._prompt = DEFAULT_PROMPT  # must contain `{text}`
 
         elif self.provider == "openresume":
-            logger.info("Calling OpenResume provider (not implemented)")
-            raise NotImplementedError("provider='openresume' not implemented yet")
+            logger.info("Calling OpenResume provider")
 
         else:
             raise ValueError(f"Provider '{self.provider}' isn't supported.")
@@ -62,6 +62,10 @@ class ResumeParser:
         elif self.provider == "google":
             input_text = self._prompt.format(text=text) if self._prompt else text
             msg = self._model.invoke(input_text)
-            return getattr(msg, "content", str(msg))
-
-        raise RuntimeError("Invalid provider state")
+            content = getattr(msg, "content", str(msg))
+            return extract_json_content(content)
+        
+        elif self.provider == "openresume":
+            logger.info(f"Provider: {self.provider}, File: {text}")            
+        else:
+            raise RuntimeError("Invalid provider state")

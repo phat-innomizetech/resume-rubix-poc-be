@@ -29,12 +29,16 @@ class ResumeProcessor:
         self.file_path = file_path
         self.loader = ResumeLoader(file_path=self.file_path)
         self.parser = ResumeParser(model_name, provider, prompt=prompt)
+        self.provider = provider
 
     def process(self):
+        if self.provider == "openresume":
+            parsed_text = self.parser.parse(self.file_path)
+            return DataResponse.success(data=ResumeSchema.model_validate(parsed_text))
         try:
             logger.info("Run resume processing pipeline")
             raw_text = self.loader.get_doc()
-            parsed_text = self.parser.parse(raw_text).content
+            parsed_text = self.parser.parse(raw_text)
             return DataResponse.success(data=ResumeSchema.model_validate(parsed_text))
         except Exception as e:
             logger.error(f"Resume processing pipeline - {e}")
